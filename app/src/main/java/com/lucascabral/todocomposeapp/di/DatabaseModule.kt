@@ -24,4 +24,8 @@ object DatabaseModule {
         ToDoDatabase::class.java,
         DATABASE_NAME
     ).build()
+
+    @Singleton
+    @Provides
+    fun provideDao(database: ToDoDatabase) = database.toDoDao()
 }
