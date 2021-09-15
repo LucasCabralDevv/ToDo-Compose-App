@@ -76,4 +76,7 @@ dependencies {
     // Dagger - Hilt
     implementation "com.google.dagger:hilt-android:$dagger_hilt"
     kapt "com.google.dagger:hilt-android-compiler:$hilt_compiler"
+
+    // Compose Navigation
+    implementation("androidx.navigation:navigation-compose:$navigation_compose")
 }
