@@ -6,6 +6,7 @@ buildscript {
         dagger_hilt = "2.36"
         hilt_compiler = "2.36"
         datastore_preferences = "1.0.0"
+        navigation_compose = "2.4.0-alpha06"
     }
     repositories {
         google()
