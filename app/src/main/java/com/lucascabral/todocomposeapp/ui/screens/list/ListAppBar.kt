@@ -1,15 +1,19 @@
 package com.lucascabral.todocomposeapp.ui.screens.list
 
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.lucascabral.todocomposeapp.R
 import com.lucascabral.todocomposeapp.components.PriorityItem
 import com.lucascabral.todocomposeapp.data.models.Priority
+import com.lucascabral.todocomposeapp.ui.theme.LARGE_PADDING
+import com.lucascabral.todocomposeapp.ui.theme.Typography
 import com.lucascabral.todocomposeapp.ui.theme.topAppBarBackgroundColor
 import com.lucascabral.todocomposeapp.ui.theme.topAppBarContentColor
 
@@ -17,24 +21,27 @@ import com.lucascabral.todocomposeapp.ui.theme.topAppBarContentColor
 fun ListAppBar() {
     DefaultListAppBar(
         onSearchClicked = {},
-        onSortClicked = {}
+        onSortClicked = {},
+        onDeleteClicked = {}
     )
 }
 
 @Composable
 fun DefaultListAppBar(
     onSearchClicked: () -> Unit,
-    onSortClicked: (Priority) -> Unit
+    onSortClicked: (Priority) -> Unit,
+    onDeleteClicked: () -> Unit
 ) {
     TopAppBar(
         title = {
             Text(text = "Tasks", color = MaterialTheme.colors.topAppBarContentColor)
         },
         actions = {
-                  ListAppBarActions(
-                      onSearchClicked = onSearchClicked,
-                      onSortClicked = onSortClicked
-                  )
+            ListAppBarActions(
+                onSearchClicked = onSearchClicked,
+                onSortClicked = onSortClicked,
+                onDeleteClicked = onDeleteClicked
+            )
         },
         backgroundColor = MaterialTheme.colors.topAppBarBackgroundColor
     )
@@ -43,10 +50,12 @@ fun DefaultListAppBar(
 @Composable
 fun ListAppBarActions(
     onSearchClicked: () -> Unit,
-    onSortClicked: (Priority) -> Unit
+    onSortClicked: (Priority) -> Unit,
+    onDeleteClicked: () -> Unit
 ) {
     SearchAction(onSearchClicked = onSearchClicked)
     SortAction(onSortClicked = onSortClicked)
+    DeleteAllAction(onDeleteClicked = onDeleteClicked)
 }
 
 @Composable
@@ -97,12 +106,46 @@ fun SortAction(
                 PriorityItem(priority = Priority.HIGH)
             }
             DropdownMenuItem(
-                    onClick = {
-                        expanded = false
-                        onSortClicked(Priority.NONE)
-                    }
-                    ) {
+                onClick = {
+                    expanded = false
+                    onSortClicked(Priority.NONE)
+                }
+            ) {
                 PriorityItem(priority = Priority.NONE)
+            }
+        }
+    }
+}
+
+@Composable
+fun DeleteAllAction(
+    onDeleteClicked: () -> Unit
+) {
+    var expanded by remember { mutableStateOf(false) }
+
+    IconButton(
+        onClick = { expanded = true }
+    ) {
+        Icon(
+            painter = painterResource(id = R.drawable.ic_vert_menu),
+            contentDescription = stringResource(id = R.string.delete_all_action),
+            tint = MaterialTheme.colors.topAppBarContentColor
+        )
+        DropdownMenu(
+            expanded = expanded,
+            onDismissRequest = { expanded = false }
+        ) {
+            DropdownMenuItem(
+                onClick = {
+                    onDeleteClicked()
+                    expanded = false
+                }
+            ) {
+                Text(
+                    modifier = Modifier.padding(start = LARGE_PADDING),
+                    text = stringResource(id = R.string.delete_all_action),
+                    style = Typography.subtitle2
+                )
             }
         }
     }
@@ -113,6 +156,7 @@ fun SortAction(
 private fun DefaultListAppBarPreview() {
     DefaultListAppBar(
         onSearchClicked = {},
-        onSortClicked = {}
+        onSortClicked = {},
+        onDeleteClicked = {}
     )
 }
