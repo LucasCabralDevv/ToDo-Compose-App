@@ -22,7 +22,6 @@ fun ListScreen(
     sharedViewModel: SharedViewModel
 ) {
     LaunchedEffect(key1 = true) {
-        Log.d("ListScreen", "LaunchedEffect Triggered!")
         sharedViewModel.getAllTasks()
     }
 
