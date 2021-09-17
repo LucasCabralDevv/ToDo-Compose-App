@@ -1,5 +1,6 @@
 package com.lucascabral.todocomposeapp.navigation
 
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.navigation.NavHostController
@@ -9,6 +10,7 @@ import com.lucascabral.todocomposeapp.navigation.destinations.taskComposable
 import com.lucascabral.todocomposeapp.ui.viewmodels.SharedViewModel
 import com.lucascabral.todocomposeapp.util.Constants.LIST_SCREEN
 
+@ExperimentalMaterialApi
 @Composable
 fun SetupNavigation(
     navController: NavHostController,
