@@ -31,7 +31,9 @@ fun ListScreen(
                 searchTextState = searchTextState
             )
         },
-        content = {},
+        content = {
+            ListContent()
+        },
         floatingActionButton = {
             ListFab(onFabClicked = navigateToTaskScreen)
         }
@@ -48,7 +50,8 @@ fun ListFab(
         },
         backgroundColor = MaterialTheme.colors.fabBackgroundColor
     ) {
-        Icon(imageVector = Icons.Filled.Add,
+        Icon(
+            imageVector = Icons.Filled.Add,
             contentDescription = stringResource(id = R.string.add_button),
             tint = Color.White
         )
