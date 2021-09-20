@@ -1,17 +1,20 @@
 package com.lucascabral.todocomposeapp.navigation.destinations
 
-import android.util.Log
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navArgument
 import com.lucascabral.todocomposeapp.ui.screens.task.TaskScreen
+import com.lucascabral.todocomposeapp.ui.viewmodels.SharedViewModel
 import com.lucascabral.todocomposeapp.util.Action
 import com.lucascabral.todocomposeapp.util.Constants.TASK_ARGUMENT_KEY
 import com.lucascabral.todocomposeapp.util.Constants.TASK_SCREEN
 
 fun NavGraphBuilder.taskComposable(
-    navigateToListScreen: (Action) -> Unit
+    navigateToListScreen: (Action) -> Unit,
+    sharedViewModel: SharedViewModel
 ) {
     composable(
         route = TASK_SCREEN,
@@ -20,7 +23,11 @@ fun NavGraphBuilder.taskComposable(
         })
     ) { navBackStackEntry ->
         val taskId = navBackStackEntry.arguments!!.getInt(TASK_ARGUMENT_KEY)
-        Log.d("TASK_COMPOSABLE", taskId.toString())
-        TaskScreen(navigateToListScreen = navigateToListScreen)
+        sharedViewModel.getSelectedTask(taskId = taskId)
+        val selectedTask by sharedViewModel.selectedTask.collectAsState()
+        TaskScreen(
+            selectedTask = selectedTask,
+            navigateToListScreen = navigateToListScreen
+        )
     }
 }
