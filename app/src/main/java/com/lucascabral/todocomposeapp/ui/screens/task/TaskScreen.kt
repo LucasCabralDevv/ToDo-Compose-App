@@ -2,6 +2,7 @@ package com.lucascabral.todocomposeapp.ui.screens.task
 
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
+import com.lucascabral.todocomposeapp.data.models.Priority
 import com.lucascabral.todocomposeapp.data.models.ToDoTask
 import com.lucascabral.todocomposeapp.util.Action
 
@@ -18,6 +19,15 @@ fun TaskScreen(
                 navigateToListScreen = navigateToListScreen
             )
         },
-        content = {}
+        content = {
+            TaskContent(
+                title = "",
+                onTitleChange = {},
+                description = "",
+                onDescriptionChange = {},
+                priority = Priority.LOW,
+                onPrioritySelected = {}
+            )
+        }
     )
 }
