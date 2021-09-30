@@ -20,7 +20,9 @@ fun NavGraphBuilder.listComposable(
         arguments = listOf(navArgument(LIST_ARGUMENT_KEY){
             type = NavType.StringType
         })
-    ) {
+    ) { navBackStackEntry ->
+
+
         ListScreen(
             navigateToTaskScreen = navigateToTaskScreen,
             sharedViewModel = sharedViewModel
