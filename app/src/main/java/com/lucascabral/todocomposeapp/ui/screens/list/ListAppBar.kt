@@ -23,6 +23,7 @@ import com.lucascabral.todocomposeapp.components.PriorityItem
 import com.lucascabral.todocomposeapp.data.models.Priority
 import com.lucascabral.todocomposeapp.ui.theme.*
 import com.lucascabral.todocomposeapp.ui.viewmodels.SharedViewModel
+import com.lucascabral.todocomposeapp.util.Action
 import com.lucascabral.todocomposeapp.util.SearchAppBarState
 import com.lucascabral.todocomposeapp.util.TrailingIconState
 
@@ -39,7 +40,9 @@ fun ListAppBar(
                     sharedViewModel.searchAppBarState.value = SearchAppBarState.OPENED
                 },
                 onSortClicked = {},
-                onDeleteClicked = {}
+                onDeleteAllClicked = {
+                    sharedViewModel.action.value = Action.DELETE_ALL
+                }
             )
         }
         else -> {
@@ -64,7 +67,7 @@ fun ListAppBar(
 fun DefaultListAppBar(
     onSearchClicked: () -> Unit,
     onSortClicked: (Priority) -> Unit,
-    onDeleteClicked: () -> Unit
+    onDeleteAllClicked: () -> Unit
 ) {
     TopAppBar(
         title = {
@@ -76,7 +79,7 @@ fun DefaultListAppBar(
             ListAppBarActions(
                 onSearchClicked = onSearchClicked,
                 onSortClicked = onSortClicked,
-                onDeleteClicked = onDeleteClicked
+                onDeleteAllClicked = onDeleteAllClicked
             )
         },
         backgroundColor = MaterialTheme.colors.topAppBarBackgroundColor
@@ -87,11 +90,11 @@ fun DefaultListAppBar(
 fun ListAppBarActions(
     onSearchClicked: () -> Unit,
     onSortClicked: (Priority) -> Unit,
-    onDeleteClicked: () -> Unit
+    onDeleteAllClicked: () -> Unit
 ) {
     SearchAction(onSearchClicked = onSearchClicked)
     SortAction(onSortClicked = onSortClicked)
-    DeleteAllAction(onDeleteClicked = onDeleteClicked)
+    DeleteAllAction(onDeleteAllClicked = onDeleteAllClicked)
 }
 
 @Composable
@@ -155,7 +158,7 @@ fun SortAction(
 
 @Composable
 fun DeleteAllAction(
-    onDeleteClicked: () -> Unit
+    onDeleteAllClicked: () -> Unit
 ) {
     var expanded by remember { mutableStateOf(false) }
 
@@ -173,7 +176,7 @@ fun DeleteAllAction(
         ) {
             DropdownMenuItem(
                 onClick = {
-                    onDeleteClicked()
+                    onDeleteAllClicked()
                     expanded = false
                 }
             ) {
@@ -286,7 +289,7 @@ private fun DefaultListAppBarPreview() {
     DefaultListAppBar(
         onSearchClicked = {},
         onSortClicked = {},
-        onDeleteClicked = {}
+        onDeleteAllClicked = {}
     )
 }
 
