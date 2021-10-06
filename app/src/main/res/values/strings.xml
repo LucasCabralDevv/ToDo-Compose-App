@@ -22,6 +22,8 @@
     <string name="task_description">Description</string>
 
     //Dialog
-    <string name="dialog_yes_clicked">"Yes"</string>
-    <string name="dialog_no_clicked">"No"</string>
+    <string name="dialog_yes_clicked">Yes</string>
+    <string name="dialog_no_clicked">No</string>
+    <string name="dialog_delete_task">Remove \'%1$s\'?</string>
+    <string name="dialog_delete_confirmation">Are you sure do want to remove \'%1$s\'?</string>
 </resources>
