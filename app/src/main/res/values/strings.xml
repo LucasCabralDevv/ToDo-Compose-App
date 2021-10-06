@@ -20,4 +20,8 @@
 
     <string name="task_title">Title</string>
     <string name="task_description">Description</string>
+
+    //Dialog
+    <string name="dialog_yes_clicked">"Yes"</string>
+    <string name="dialog_no_clicked">"No"</string>
 </resources>
