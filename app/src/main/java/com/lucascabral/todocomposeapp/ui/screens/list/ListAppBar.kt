@@ -40,7 +40,9 @@ fun ListAppBar(
                 onSearchClicked = {
                     sharedViewModel.searchAppBarState.value = SearchAppBarState.OPENED
                 },
-                onSortClicked = {},
+                onSortClicked = { priority ->
+                    sharedViewModel.persistSortState(priority = priority)
+                },
                 onDeleteAllConfirm = {
                     sharedViewModel.action.value = Action.DELETE_ALL
                 }
@@ -72,7 +74,8 @@ fun DefaultListAppBar(
 ) {
     TopAppBar(
         title = {
-            Text(text = stringResource(id = R.string.list_screen_title),
+            Text(
+                text = stringResource(id = R.string.list_screen_title),
                 color = MaterialTheme.colors.topAppBarContentColor
             )
         },
@@ -254,7 +257,7 @@ fun SearchAppBar(
             trailingIcon = {
                 IconButton(
                     onClick = {
-                        when(trailingIconState) {
+                        when (trailingIconState) {
                             TrailingIconState.READY_TO_DELETE -> {
                                 onTextChange("")
                                 trailingIconState = TrailingIconState.READY_TO_CLOSE
