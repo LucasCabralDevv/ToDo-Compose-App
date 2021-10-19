@@ -20,7 +20,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.lucascabral.todocomposeapp.R
 import com.lucascabral.todocomposeapp.data.models.Priority
 import com.lucascabral.todocomposeapp.data.models.ToDoTask
@@ -119,7 +118,7 @@ fun DisplayTasks(
                 onSwipeToDelete(Action.DELETE, task)
             }
 
-            val degress by animateFloatAsState(
+            val degrees by animateFloatAsState(
                 targetValue = if (dismissState.targetValue == DismissValue.Default) 0f else -45f
             )
 
@@ -127,7 +126,7 @@ fun DisplayTasks(
                 state = dismissState,
                 directions = setOf(DismissDirection.EndToStart),
                 dismissThresholds = { FractionalThreshold(0.2f) },
-                background = { RedBackground(degrees = degress) },
+                background = { RedBackground(degrees = degrees) },
                 dismissContent = {
                     TaskItem(
                         toDoTask = task,
