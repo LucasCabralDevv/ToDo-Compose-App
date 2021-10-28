@@ -7,9 +7,10 @@ import androidx.compose.runtime.remember
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import com.lucascabral.todocomposeapp.navigation.destinations.listComposable
+import com.lucascabral.todocomposeapp.navigation.destinations.splashComposable
 import com.lucascabral.todocomposeapp.navigation.destinations.taskComposable
 import com.lucascabral.todocomposeapp.ui.viewmodels.SharedViewModel
-import com.lucascabral.todocomposeapp.util.Constants.LIST_SCREEN
+import com.lucascabral.todocomposeapp.util.Constants.SPLASH_SCREEN
 
 @ExperimentalAnimationApi
 @ExperimentalMaterialApi
@@ -24,14 +25,17 @@ fun SetupNavigation(
     
     NavHost(
         navController = navController,
-        startDestination = LIST_SCREEN
+        startDestination = SPLASH_SCREEN
     ) {
+        splashComposable(
+            navigateToListScreen = screen.splash
+        )
         listComposable(
-            navigateToTaskScreen = screen.task,
+            navigateToTaskScreen = screen.list,
             sharedViewModel = sharedViewModel
         )
         taskComposable(
-            navigateToListScreen = screen.list,
+            navigateToListScreen = screen.task,
             sharedViewModel = sharedViewModel
         )
     }
