@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -32,7 +33,7 @@ fun EmptyContent() {
             contentDescription = stringResource(id = R.string.sad_face_icon),
             tint = MediumGray
         ) */
-        LoaderLottieAnimation()
+        EmptyTasksLottieAnimation()
         Text(
             text = stringResource(id = R.string.empty_content),
             color = MediumGray,
@@ -43,14 +44,16 @@ fun EmptyContent() {
 }
 
 @Composable
-fun LoaderLottieAnimation() {
+fun EmptyTasksLottieAnimation() {
+    val anim = rememberLottieAnimatable()
     val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.add_task))
-    LottieAnimation(
-        modifier = Modifier.size(440.dp),
-        iterations = Int.MAX_VALUE,
-        speed = 1.2f,
-        composition = composition
-    )
+    LaunchedEffect(composition) {
+        anim.animate(
+            composition,
+            iterations = LottieConstants.IterateForever,
+        )
+    }
+    LottieAnimation(anim.composition, anim.progress)
 }
 
 @Composable

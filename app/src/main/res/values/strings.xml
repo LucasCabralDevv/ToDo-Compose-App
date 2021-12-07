@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ToDo Compose App</string>
+    <string name="app_name">Daily Tasks</string>
 
     //SplashScreen
     <string name="to_do_logo">To-Do Logo</string>
