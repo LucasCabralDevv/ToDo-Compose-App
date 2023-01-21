@@ -10,6 +10,8 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
 import com.google.accompanist.navigation.animation.composable
 import androidx.navigation.compose.navArgument
+import com.lucascabral.todocomposeapp.navigation.animation.enterTransitionAnimation
+import com.lucascabral.todocomposeapp.navigation.animation.exitTransitionAnimation
 import com.lucascabral.todocomposeapp.ui.screens.task.TaskScreen
 import com.lucascabral.todocomposeapp.ui.viewmodels.SharedViewModel
 import com.lucascabral.todocomposeapp.util.Action
@@ -27,12 +29,10 @@ fun NavGraphBuilder.taskComposable(
             type = NavType.IntType
         }),
         enterTransition = { _, _ ->
-            slideInHorizontally(
-                initialOffsetX = { fullWidth -> -fullWidth },
-                animationSpec = tween(
-                    durationMillis = 350
-                )
-            )
+            enterTransitionAnimation()
+        },
+        exitTransition = { _, _ ->
+            exitTransitionAnimation()
         }
     ) { navBackStackEntry ->
         val taskId = navBackStackEntry.arguments!!.getInt(TASK_ARGUMENT_KEY)

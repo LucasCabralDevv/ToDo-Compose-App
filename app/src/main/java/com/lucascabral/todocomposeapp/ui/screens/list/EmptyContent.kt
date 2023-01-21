@@ -34,12 +34,12 @@ fun EmptyContent() {
             tint = MediumGray
         ) */
         EmptyTasksLottieAnimation()
-        Text(
+        /* Text(
             text = stringResource(id = R.string.empty_content),
             color = MediumGray,
             fontWeight = FontWeight.Bold,
             fontSize = MaterialTheme.typography.h6.fontSize
-        )
+        ) */
     }
 }
 

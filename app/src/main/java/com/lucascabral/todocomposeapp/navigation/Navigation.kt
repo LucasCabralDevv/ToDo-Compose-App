@@ -1,5 +1,6 @@
 package com.lucascabral.todocomposeapp.navigation
 
+import android.content.Context
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
@@ -17,6 +18,7 @@ import com.lucascabral.todocomposeapp.util.Constants.SPLASH_SCREEN
 @Composable
 fun SetupNavigation(
     navController: NavHostController,
+    context: Context,
     sharedViewModel: SharedViewModel
 ) {
     val screen = remember(navController) {
@@ -32,6 +34,7 @@ fun SetupNavigation(
         )
         listComposable(
             navigateToTaskScreen = screen.list,
+            context = context,
             sharedViewModel = sharedViewModel
         )
         taskComposable(

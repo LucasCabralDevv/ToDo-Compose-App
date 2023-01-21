@@ -28,6 +28,7 @@ class MainActivity : ComponentActivity() {
                 navController = rememberAnimatedNavController()
                 SetupNavigation(
                     navController = navController,
+                    context = this,
                     sharedViewModel = sharedViewModel
                 )
             }

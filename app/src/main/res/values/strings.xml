@@ -32,4 +32,9 @@
 
     <string name="delete_all_tasks">Remove All Tasks?</string>
     <string name="delete_all_tasks_confirm">Are you sure you want remove all tasks? There is no going back after this action.</string>
+
+    <string name="remove_all_tasks">All Tasks Removed.</string>
+    <string name="undo_action_label">UNDO</string>
+    <string name="confirm_action_label">OK</string>
+
 </resources>

@@ -1,5 +1,6 @@
 package com.lucascabral.todocomposeapp.navigation.destinations
 
+import android.content.Context
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.LaunchedEffect
@@ -17,6 +18,7 @@ import com.lucascabral.todocomposeapp.util.toAction
 @ExperimentalMaterialApi
 fun NavGraphBuilder.listComposable(
     navigateToTaskScreen: (taskId: Int) -> Unit,
+    context: Context,
     sharedViewModel: SharedViewModel
 ) {
     composable(
@@ -34,6 +36,7 @@ fun NavGraphBuilder.listComposable(
 
         ListScreen(
             navigateToTaskScreen = navigateToTaskScreen,
+            context = context,
             sharedViewModel = sharedViewModel
         )
     }

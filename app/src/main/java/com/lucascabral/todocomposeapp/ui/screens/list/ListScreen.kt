@@ -1,5 +1,6 @@
 package com.lucascabral.todocomposeapp.ui.screens.list
 
+import android.content.Context
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -19,6 +20,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun ListScreen(
     navigateToTaskScreen: (taskId: Int) -> Unit,
+    context: Context,
     sharedViewModel: SharedViewModel
 ) {
     LaunchedEffect(key1 = true) {
@@ -43,7 +45,8 @@ fun ListScreen(
         handleDatabaseActions = { sharedViewModel.handleDatabaseActions(action = action) },
         onUndoClicked = { sharedViewModel.action.value = it },
         taskTitle = sharedViewModel.title.value,
-        action = action
+        action = action,
+        context = context
     )
 
     Scaffold(
@@ -100,6 +103,7 @@ fun DisplaySnackBar(
     handleDatabaseActions: () -> Unit,
     onUndoClicked: (Action) -> Unit,
     taskTitle: String,
+    context: Context,
     action: Action
 ) {
     handleDatabaseActions()
@@ -108,8 +112,8 @@ fun DisplaySnackBar(
         if (action != Action.NO_ACTION) {
             scope.launch {
                 val snackBarResult = scaffoldState.snackbarHostState.showSnackbar(
-                    message = setMessage(action = action, taskTitle = taskTitle),
-                    actionLabel = setActionLabel(action)
+                    message = setMessage(action = action, taskTitle = taskTitle, context = context),
+                    actionLabel = setActionLabel(action, context)
                 )
                 undoDeleteTask(
                     action = action,
@@ -121,18 +125,18 @@ fun DisplaySnackBar(
     }
 }
 
-private fun setMessage(action: Action, taskTitle: String): String {
+private fun setMessage(action: Action, taskTitle: String, context: Context): String {
     return when (action) {
-        Action.DELETE_ALL -> "All Tasks Removed."
+        Action.DELETE_ALL -> context.getString(R.string.remove_all_tasks)
         else -> "${action.name}: $taskTitle"
     }
 }
 
-private fun setActionLabel(action: Action): String {
+private fun setActionLabel(action: Action, context: Context): String {
     return if (action.name == "DELETE") {
-        "UNDO"
+        context.getString(R.string.undo_action_label)
     } else {
-        "OK"
+        context.getString(R.string.confirm_action_label)
     }
 }
 
